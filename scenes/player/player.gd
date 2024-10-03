@@ -2,10 +2,6 @@ extends CharacterBody2D
 
 const MAX_MOVEMENT_SPEED = 200
 
-func _ready():
-	pass
-
-
 func _process(delta: float):
 	var movement_vec = get_movement_vec2()
 	var movement_dir = movement_vec.normalized()

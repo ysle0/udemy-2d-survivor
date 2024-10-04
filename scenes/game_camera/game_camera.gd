@@ -3,10 +3,12 @@ extends Camera2D
 var player: Node2D
 var target_position = Vector2.ZERO
 
+
 func _ready():
 	make_current()
 
 	player = get_tree().get_first_node_in_group("player") as Node2D
+
 
 func _process(delta: float):
 	acquire_target()

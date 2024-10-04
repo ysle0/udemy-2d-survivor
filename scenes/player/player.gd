@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 const MAX_MOVEMENT_SPEED = 200
 
-func _physics_process(delta: float):
+
+func _physics_process(_delta: float):
 	var movement_vec = get_movement_vec2()
 	var movement_dir = movement_vec.normalized()
 	velocity = movement_dir * MAX_MOVEMENT_SPEED

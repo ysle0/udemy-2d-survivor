@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const MAX_SPEED: int = 75
+const MAX_SPEED: int = 40
 const MIN_DISTANCE_TO_PLAYER: float = 4.5 * 4.5
 var player: Node2D
 
@@ -8,7 +8,7 @@ var player: Node2D
 func _ready():
 	var tree = get_tree()
 	if !tree.has_group("player"):
-		push_error("err: no player group found")
+		push_error("no player group found")
 		return
 
 	self.player = get_tree().get_first_node_in_group("player")
@@ -16,7 +16,7 @@ func _ready():
 	$Area2D.area_entered.connect(self.on_area_entered)
 
 
-func _physics_process(_delta: float):
+func _process(_delta: float):
 	if !self.check_distance_between_player(MIN_DISTANCE_TO_PLAYER):
 		return
 

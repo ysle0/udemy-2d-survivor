@@ -3,13 +3,17 @@ extends CharacterBody2D
 const MAX_MOVEMENT_SPEED := 125
 const ACCELATION_SMOOTHING := 15
 
+@onready var dash_ability_controller := %DashAbilityController as DashAbilityController
+
 
 func _process(delta: float):
 	var movement_dir := get_movement_vec2().normalized()
-	var target_velocity := movement_dir * MAX_MOVEMENT_SPEED
-	var lerp_weight := 1 - exp(-delta * ACCELATION_SMOOTHING)
+	var target_velocity := movement_dir * self.MAX_MOVEMENT_SPEED
+	target_velocity = self.dash_ability_controller.apply_dash_power(target_velocity)
 
-	self.velocity = self.velocity.lerp(target_velocity, lerp_weight)
+	var weight := 1 - exp(-delta * self.ACCELATION_SMOOTHING)
+	var next_velocity := self.velocity.lerp(target_velocity, weight)
+	self.velocity = next_velocity
 
 	move_and_slide()
 

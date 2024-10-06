@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://becw1bli3vptr"]
+[gd_scene load_steps=7 format=3 uid="uid://becw1bli3vptr"]
 
 [ext_resource type="Texture2D" uid="uid://b1hh0evehb1nw" path="res://scenes/player/player.png" id="1_247vy"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_svwvf"]
 [ext_resource type="PackedScene" uid="uid://dw27x15cqr3d4" path="res://scenes/ability/sword/sword_ability_controller.tscn" id="2_ltlmd"]
 [ext_resource type="PackedScene" uid="uid://djerc4oyhnqg2" path="res://scenes/ability/sword/sword_ability.tscn" id="3_ndo4k"]
+[ext_resource type="PackedScene" uid="uid://c45a3l7fbn7l7" path="res://scenes/ability/dash/dash_ability_controller.tscn" id="5_2efd0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6n4jn"]
 radius = 5.0
@@ -14,6 +15,9 @@ motion_mode = 1
 script = ExtResource("1_svwvf")
 
 [node name="AbilityManager" type="Node" parent="."]
+
+[node name="DashAbilityController" parent="AbilityManager" instance=ExtResource("5_2efd0")]
+unique_name_in_owner = true
 
 [node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_ltlmd")]
 sword_ability = ExtResource("3_ndo4k")

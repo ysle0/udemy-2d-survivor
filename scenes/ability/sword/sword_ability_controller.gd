@@ -1,6 +1,10 @@
+class_name SwordAbilityController
 extends Node
 
 @export var max_detect_range: float = 150.0
+var detect_range: float:
+	get: return max_detect_range * max_detect_range
+
 @export var sword_ability: PackedScene
 
 var player: Node2D
@@ -13,10 +17,6 @@ func _ready():
 	$Timer.timeout.connect(self.on_timer_timeout)
 
 
-func get_valid_detect_range() -> float:
-	return self.max_detect_range * self.max_detect_range
-
-
 func on_timer_timeout():
 	var player_pos := self.player.global_position
 	var enemies := get_tree().get_nodes_in_group("enemy")
@@ -24,9 +24,8 @@ func on_timer_timeout():
 		return
 
 	enemies = enemies.filter(func(enemy: Node2D):
-		var valid_range := self.get_valid_detect_range()
 		var dist := enemy.global_position.distance_squared_to(player_pos)
-		return dist <= valid_range
+		return dist <= self.detect_range
 	)
 	if enemies.size() == 0:
 		return

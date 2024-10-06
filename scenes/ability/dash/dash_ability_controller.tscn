@@ -4,7 +4,4 @@
 
 [node name="DashAbilityController" type="Node"]
 script = ExtResource("1_6ipgc")
-
-[node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 5.0
+dash_power_reduction_in_sec = 0.7

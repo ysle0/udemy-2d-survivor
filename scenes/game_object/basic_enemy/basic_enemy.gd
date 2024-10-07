@@ -2,7 +2,10 @@ extends CharacterBody2D
 
 const MAX_SPEED: int = 40
 const MIN_DISTANCE_TO_PLAYER: float = 4.5 * 4.5
+
 var player: Node2D
+
+@onready var health_component := $HealthComponent as HealthComponent
 
 
 func _ready():
@@ -38,4 +41,4 @@ func check_distance_between_player(min_distance: float) -> bool:
 
 
 func on_area_entered(_other_area: Area2D):
-	self.queue_free()
+	health_component.damage(100)

@@ -10,7 +10,7 @@ var current_dash_power := 0.0
 
 @onready var cooldown_timer := get_tree().create_timer(cooldown_time_in_sec)
 
-signal on_cooldown
+# signal on_cooldown
 
 func _ready() -> void:
 	assert(cooldown_time_in_sec > 0.0, "cooldown time must be bigger than 0.0")

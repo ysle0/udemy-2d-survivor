@@ -6,6 +6,7 @@ var detect_range: float:
 	get: return max_detect_range * max_detect_range
 
 @export var sword_ability: PackedScene
+@export var damage := 5
 
 var player: Node2D
 
@@ -37,8 +38,9 @@ func on_timer_timeout():
 	)
 	var target_enemy = enemies[0]
 
-	var sword_instance: Node2D = sword_ability.instantiate()
+	var sword_instance := sword_ability.instantiate() as SwordAbility
 	self.player.get_parent().add_child(sword_instance)
+	sword_instance.hitbox_component.damage = self.damage
 
 	var rndpos_in_circle = Vector2.RIGHT.rotated(randf_range(0, TAU)) * 4
 	sword_instance.global_position = target_enemy.global_position + rndpos_in_circle

@@ -16,8 +16,6 @@ func _ready():
 
 	self.player = get_tree().get_first_node_in_group("player")
 
-	$Area2D.area_entered.connect(self.on_area_entered)
-
 
 func _process(_delta: float):
 	if !self.check_distance_between_player(MIN_DISTANCE_TO_PLAYER):
@@ -38,7 +36,3 @@ func check_distance_between_player(min_distance: float) -> bool:
 	var distance_to_player = global_position.distance_to(self.player.global_position)
 #	print("distance to player: %s" % distance_to_player)
 	return distance_to_player > min_distance
-
-
-func on_area_entered(_other_area: Area2D):
-	health_component.damage(100)

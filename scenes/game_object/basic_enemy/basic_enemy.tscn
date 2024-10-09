@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0l7o82wab1hp"]
+[gd_scene load_steps=8 format=3 uid="uid://c0l7o82wab1hp"]
 
 [ext_resource type="Script" path="res://scenes/game_object/basic_enemy/basic_enemy.gd" id="1_h1fkn"]
 [ext_resource type="Texture2D" uid="uid://dtdx2i3omfrcm" path="res://scenes/game_object/basic_enemy/basic_enemy.png" id="2_nvmv3"]
 [ext_resource type="PackedScene" uid="uid://cswiwec1nok5t" path="res://scenes/component/vial_drop_component.tscn" id="3_58b8y"]
 [ext_resource type="PackedScene" uid="uid://l316usymp7nt" path="res://scenes/component/health_component.tscn" id="3_bwloy"]
+[ext_resource type="PackedScene" uid="uid://7vrjb6updy1d" path="res://scenes/component/hurtbox_component.tscn" id="4_qd3jm"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_takkq"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_2hr25"]
 radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l7xql"]
@@ -18,17 +19,16 @@ motion_mode = 1
 script = ExtResource("1_h1fkn")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_bwloy")]
+unique_name_in_owner = true
 
 [node name="VialDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_58b8y")]
 health_component = NodePath("../HealthComponent")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
+[node name="HurtboxComponent" parent="." instance=ExtResource("4_qd3jm")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(0, -5)
-shape = SubResource("CircleShape2D_takkq")
+shape = SubResource("CircleShape2D_2hr25")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
@@ -38,5 +38,3 @@ offset = Vector2(0, -3)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_l7xql")
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

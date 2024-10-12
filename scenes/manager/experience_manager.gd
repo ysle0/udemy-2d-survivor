@@ -8,7 +8,7 @@ signal level_up(new_level: int)
 const TARGET_EXPERIENCE_GROWTH := 1.5
 
 var current_experience := 0.0
-var target_experience := 5.0
+var target_experience := 1.0
 var current_level := 1
 
 

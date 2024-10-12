@@ -9,7 +9,6 @@ var current_upgrades := {
 	"test": "hello"
 }
 
-
 func _ready():
 	experience_manager.level_up.connect(on_level_up)
 
@@ -22,7 +21,7 @@ func on_level_up(new_level: int):
 	var upgrade_screen_instance := upgrade_screen_scene.instantiate() as UpgradeScreen
 	add_child(upgrade_screen_instance)
 	upgrade_screen_instance.set_ability_upgrade(
-        [chosen_upgrade] as Array[AbilityUpgrade])
+		[chosen_upgrade] as Array[AbilityUpgrade])
 
 
 func apply_upgrade(upgrade: AbilityUpgrade):

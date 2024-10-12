@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bmc6qk75kkbpt" path="res://scenes/ui/ability_upgrade_card.tscn" id="1_odhk3"]
 
 [node name="UpgradeScreen" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_71q2x")
 upgrade_card_scene = ExtResource("1_odhk3")
 

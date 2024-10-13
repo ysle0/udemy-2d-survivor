@@ -2,20 +2,28 @@ class_name SwordAbilityController
 extends Node
 
 @export var max_detect_range: float = 150.0
-var detect_range: float:
-	get: return max_detect_range * max_detect_range
-
 @export var sword_ability: PackedScene
 @export var damage := 5
 
+@onready var timer := $Timer as Timer
+
+
 var player: Node2D
+var base_wait_time: float
+
+
+var detect_range: float:
+	get: return max_detect_range * max_detect_range
 
 
 func _ready():
 	self.player = get_tree().get_first_node_in_group("player") as Node2D
 	if self.player == null:
 		return
-	$Timer.timeout.connect(self.on_timer_timeout)
+
+	base_wait_time = timer.wait_time
+	timer.timeout.connect(self.on_timer_timeout)
+	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
 
 
 func on_timer_timeout():
@@ -47,3 +55,13 @@ func on_timer_timeout():
 
 	var enemy_dir: Vector2 = target_enemy.global_position - sword_instance.global_position
 	sword_instance.rotation = enemy_dir.angle()
+
+func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
+	if upgrade.id != "sword_rate":
+		return
+
+	var upgrade_quantity := current_upgrades["sword_rate"]["quantity"] as int
+	timer.wait_time = base_wait_time - (base_wait_time * .1 * upgrade_quantity)
+	timer.start()
+
+	print(timer.wait_time)

@@ -1,6 +1,7 @@
 extends CanvasLayer
 class_name UpgradeScreen
 
+signal upgrade_selected(upgrade: AbilityUpgrade)
 
 @export var upgrade_card_scene: PackedScene
 
@@ -15,3 +16,8 @@ func set_ability_upgrade(upgrades: Array[AbilityUpgrade]):
 		var card_instance := upgrade_card_scene.instantiate() as AbilityUpgradeCard
 		card_container.add_child(card_instance)
 		card_instance.set_ability_upgrade(upgrade)
+		card_instance.selected.connect(on_upgrade_selected.bind(upgrade))
+		
+
+func on_upgrade_selected(upgrade: AbilityUpgrade):
+	upgrade_selected.emit(upgrade)

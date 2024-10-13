@@ -47,7 +47,11 @@ func on_timer_timeout():
 	var target_enemy = enemies[0]
 
 	var sword_instance := sword_ability.instantiate() as SwordAbility
-	self.player.get_parent().add_child(sword_instance)
+
+	var foreground_layer := get_tree().get_first_node_in_group("foreground_layer")
+	foreground_layer.add_child(sword_instance)
+
+	# self.player.get_parent().add_child(sword_instance)
 	sword_instance.hitbox_component.damage = self.damage
 
 	var rndpos_in_circle = Vector2.RIGHT.rotated(randf_range(0, TAU)) * 4

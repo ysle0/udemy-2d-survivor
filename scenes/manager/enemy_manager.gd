@@ -20,5 +20,9 @@ func on_timer_timeout():
 	var spawn_pos: Vector2 = player.global_position + rnd_pos_in_circle
 
 	var enemy := self.basic_enemy_scene.instantiate() as Node2D
-	get_parent().add_child(enemy)
+
+	var entities_layer := get_tree().get_first_node_in_group("entities_layer")
+	entities_layer.add_child(enemy)
+	# get_parent().add_child(enemy)
+
 	enemy.global_position = spawn_pos

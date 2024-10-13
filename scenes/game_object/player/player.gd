@@ -59,4 +59,3 @@ func check_deal_damage():
 
 func on_damage_interval_timer_timeout():
 	self.check_deal_damage()
-	pass

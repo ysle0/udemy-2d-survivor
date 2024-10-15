@@ -1,10 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://becw1bli3vptr"]
+[gd_scene load_steps=10 format=3 uid="uid://becw1bli3vptr"]
 
 [ext_resource type="Texture2D" uid="uid://b1hh0evehb1nw" path="res://scenes/game_object/player/player.png" id="1_247vy"]
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_svwvf"]
 [ext_resource type="PackedScene" uid="uid://l316usymp7nt" path="res://scenes/component/health_component.tscn" id="2_j7vd8"]
 [ext_resource type="PackedScene" uid="uid://dw27x15cqr3d4" path="res://scenes/ability/sword/sword_ability_controller.tscn" id="2_ltlmd"]
 [ext_resource type="PackedScene" uid="uid://c45a3l7fbn7l7" path="res://scenes/ability/dash/dash_ability_controller.tscn" id="5_2efd0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtdxa"]
+bg_color = Color(0.247059, 0.14902, 0.192157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0uek"]
+bg_color = Color(0.262745, 0.882353, 0.701961, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8md7f"]
 radius = 7.0
@@ -26,6 +32,21 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_ltlmd")]
+unique_name_in_owner = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 4)
+offset_left = -16.0
+offset_top = -23.0
+offset_right = 16.0
+offset_bottom = -19.0
+pivot_offset = Vector2(16, 2)
+theme_override_styles/background = SubResource("StyleBoxFlat_mtdxa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c0uek")
+max_value = 1.0
+value = 0.5
+show_percentage = false
 
 [node name="PickupArea2D" type="Area2D" parent="."]
 collision_layer = 16

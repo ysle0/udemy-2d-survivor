@@ -1,6 +1,6 @@
 extends Camera2D
 
-var player: Node2D
+var player: Player
 var target_position = Vector2.ZERO
 
 
@@ -16,5 +16,5 @@ func _process(delta: float):
 
 
 func acquire_target():
-	if player:
+	if player != null:
 		target_position = player.global_position

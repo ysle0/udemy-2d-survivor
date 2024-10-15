@@ -33,6 +33,9 @@ func get_direction_to_player() -> Vector2:
 
 
 func check_distance_between_player(min_distance: float) -> bool:
+	if self.player == null:
+		return false
+
 	var distance_to_player = global_position.distance_to(self.player.global_position)
 #	print("distance to player: %s" % distance_to_player)
 	return distance_to_player > min_distance

@@ -2,11 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://b1hh0evehb1nw" path="res://scenes/game_object/player/player.png" id="1_247vy"]
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_svwvf"]
+[ext_resource type="PackedScene" uid="uid://l316usymp7nt" path="res://scenes/component/health_component.tscn" id="2_j7vd8"]
 [ext_resource type="PackedScene" uid="uid://dw27x15cqr3d4" path="res://scenes/ability/sword/sword_ability_controller.tscn" id="2_ltlmd"]
-[ext_resource type="PackedScene" uid="uid://djerc4oyhnqg2" path="res://scenes/ability/sword/sword_ability.tscn" id="3_ndo4k"]
 [ext_resource type="PackedScene" uid="uid://c45a3l7fbn7l7" path="res://scenes/ability/dash/dash_ability_controller.tscn" id="5_2efd0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8md7f"]
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6n4jn"]
 radius = 5.0
@@ -16,19 +17,30 @@ collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_svwvf")
 
+[node name="HealthComponent" parent="." instance=ExtResource("2_j7vd8")]
+unique_name_in_owner = true
+
 [node name="AbilityManager" type="Node" parent="."]
 
 [node name="DashAbilityController" parent="AbilityManager" instance=ExtResource("5_2efd0")]
 unique_name_in_owner = true
 
 [node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_ltlmd")]
-sword_ability = ExtResource("3_ndo4k")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="PickupArea2D" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea2D"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_8md7f")
+
+[node name="CollisionArea2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea2D"]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_8md7f")
 
@@ -39,3 +51,8 @@ offset = Vector2(0, -8)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_6n4jn")
+
+[node name="DamageIntervalTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true

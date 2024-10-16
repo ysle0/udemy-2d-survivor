@@ -4,15 +4,16 @@ class_name VictoryScreen
 @onready var restart_button: Button = %RestartButton
 @onready var quit_button: Button = %QuitButton
 
-func _ready() -> void:
+func _ready():
 	get_tree().paused = true
 
 	self.restart_button.pressed.connect(on_restart_button_pressed)
 	self.quit_button.pressed.connect(on_quit_button_pressed)
 
 
-func on_restart_button_pressed() -> void:
+func on_restart_button_pressed():
 	print("on_restart_button_pressed")
+
 	var tree := get_tree()
 	tree.paused = false
 	# replace current scene with the specificed scene file
@@ -21,4 +22,7 @@ func on_restart_button_pressed() -> void:
 
 func on_quit_button_pressed():
 	print("on_quit_button_pressed")
-	get_tree().quit()
+
+	var tree := get_tree()
+	tree.paused = false
+	tree.quit()

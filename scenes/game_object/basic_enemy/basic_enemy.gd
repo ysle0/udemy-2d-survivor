@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name BasicEnemy
 
 const MAX_SPEED: int = 40
 const MIN_DISTANCE_TO_PLAYER: float = 4.5 * 4.5

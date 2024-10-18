@@ -1,7 +1,7 @@
 extends Node
 class_name ArenaTimeManager
 
-@export var victory_screen_scene: PackedScene
+@export var end_screen_scene: PackedScene
 
 @onready var timer := %Timer as Timer
 
@@ -15,6 +15,6 @@ func get_time_elapsed() -> float:
 
 func on_timer_timeout():
 	print("on_timer_timeout> overwinning de spel!")
-	var victory_screen_instance := \
-		self.victory_screen_scene.instantiate() as VictoryScreen
-	owner.add_child(victory_screen_instance)
+	var end_screen_instance := \
+		self.end_screen_scene.instantiate() as VictoryScreen
+	owner.add_child(end_screen_instance)

@@ -14,7 +14,6 @@ func get_time_elapsed() -> float:
 
 
 func on_timer_timeout():
-	print("on_timer_timeout> overwinning de spel!")
-	var end_screen_instance := \
-		self.end_screen_scene.instantiate() as VictoryScreen
+	var end_screen_instance := self.end_screen_scene.instantiate() as EndScreen
 	owner.add_child(end_screen_instance)
+	end_screen_instance.set_win()

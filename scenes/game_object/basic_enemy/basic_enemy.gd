@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name BasicEnemy
 
 const MAX_SPEED: int = 40
-const MIN_DISTANCE_TO_PLAYER: float = 4.5 * 4.5
+const MIN_DISTANCE_TO_PLAYER: float = 4.5
 
 var player: Node2D
 
@@ -38,5 +38,4 @@ func check_distance_between_player(min_distance: float) -> bool:
 		return false
 
 	var distance_to_player = global_position.distance_to(self.player.global_position)
-#	print("distance to player: %s" % distance_to_player)
-	return distance_to_player > min_distance
+	return distance_to_player > min_distance * min_distance

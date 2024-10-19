@@ -47,14 +47,12 @@ func get_movement_vec2() -> Vector2:
 
 
 func on_body_entered(other_body: Node):
-	print("other_body entered", other_body.name)
 	self.colliding_body_count += 1
 	self.check_deal_damage()
 	pass
 
 
 func on_body_exited(other_body: Node):
-	print("other body exited", other_body.name)
 	self.colliding_body_count -= 1
 	pass
 

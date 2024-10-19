@@ -22,11 +22,11 @@ func _ready():
 		return
 
 	base_wait_time = timer.wait_time
-	timer.timeout.connect(self.on_timer_timeout)
-	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
+	timer.timeout.connect(self.spawn_sword)
+	GameEvents.ability_upgrade_added.connect(self.apply_weapon_upgrade)
 
 
-func on_timer_timeout():
+func spawn_sword():
 	var player_pos := self.player.global_position
 	var enemies := get_tree().get_nodes_in_group("enemy")
 	if enemies.size() == 0:
@@ -60,12 +60,10 @@ func on_timer_timeout():
 	var enemy_dir: Vector2 = target_enemy.global_position - sword_instance.global_position
 	sword_instance.rotation = enemy_dir.angle()
 
-func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
+func apply_weapon_upgrade(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
 	if upgrade.id != "sword_rate":
 		return
 
 	var upgrade_quantity := current_upgrades["sword_rate"]["quantity"] as int
 	timer.wait_time = base_wait_time - (base_wait_time * .1 * upgrade_quantity)
 	timer.start()
-
-	print(timer.wait_time)

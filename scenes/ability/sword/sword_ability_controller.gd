@@ -17,7 +17,7 @@ var get_detect_range: float:
 
 
 func _ready():
-	self.player = get_tree().get_first_node_in_group("player") as Node2D
+	self.player = get_tree().get_first_node_in_group("player") as Player
 	if self.player == null:
 		return
 

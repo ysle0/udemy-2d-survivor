@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://djerc4oyhnqg2"]
+[gd_scene load_steps=8 format=3 uid="uid://c3wwrpylkqt7n"]
 
-[ext_resource type="Texture2D" uid="uid://cpv35w0mr1cgo" path="res://scenes/ability/sword/sword.png" id="1_7d7wk"]
-[ext_resource type="Script" path="res://scenes/ability/sword/sword_ability.gd" id="1_ux6jk"]
-[ext_resource type="PackedScene" uid="uid://bq1tb5n7xah0v" path="res://scenes/component/hitbox_component.tscn" id="2_vxe1p"]
+[ext_resource type="Script" path="res://scenes/ability/axe/axe_ability.gd" id="1_3h4lc"]
+[ext_resource type="Texture2D" uid="uid://13m2g8k73cp0" path="res://scenes/ability/axe/axe.png" id="1_qgybb"]
+[ext_resource type="PackedScene" uid="uid://bq1tb5n7xah0v" path="res://scenes/component/hitbox_component.tscn" id="2_dj4gv"]
 
 [sub_resource type="Animation" id="Animation_6gmo6"]
 length = 0.75
@@ -104,11 +104,11 @@ _data = {
 "swing": SubResource("Animation_sseyw")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_07fm4"]
-size = Vector2(30, 30)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1gb4u"]
+size = Vector2(20, 40)
 
-[node name="SwordAbility" type="Node2D"]
-script = ExtResource("1_ux6jk")
+[node name="AxeAbility" type="Node2D"]
+script = ExtResource("1_3h4lc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -117,11 +117,11 @@ libraries = {
 autoplay = "swing"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_7d7wk")
+texture = ExtResource("1_qgybb")
 offset = Vector2(0, -4)
 
-[node name="HitboxComponent" parent="." instance=ExtResource("2_vxe1p")]
+[node name="HitboxComponent" parent="." instance=ExtResource("2_dj4gv")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(15, 0)
-shape = SubResource("RectangleShape2D_07fm4")
+position = Vector2(10, 2)
+shape = SubResource("RectangleShape2D_1gb4u")

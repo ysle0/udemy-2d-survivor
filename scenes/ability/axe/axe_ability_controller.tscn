@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://sfr5fys1acij"]
+
+[ext_resource type="Script" path="res://scenes/ability/axe/axe_ability_controller.gd" id="1_575yk"]
+
+[node name="AxeAbilityController" type="Node"]
+script = ExtResource("1_575yk")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true

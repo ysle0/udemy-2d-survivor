@@ -12,7 +12,7 @@ var player: Node2D
 var base_wait_time: float
 
 
-var detect_range: float:
+var get_detect_range: float:
 	get: return max_detect_range * max_detect_range
 
 
@@ -34,7 +34,7 @@ func spawn_sword():
 
 	enemies = enemies.filter(func(enemy: Node2D):
 		var dist := enemy.global_position.distance_squared_to(player_pos)
-		return dist <= self.detect_range
+		return dist <= self.get_detect_range
 	)
 	if enemies.size() == 0:
 		return

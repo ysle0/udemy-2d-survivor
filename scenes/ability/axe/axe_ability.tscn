@@ -4,8 +4,25 @@
 [ext_resource type="Texture2D" uid="uid://13m2g8k73cp0" path="res://scenes/ability/axe/axe.png" id="1_qgybb"]
 [ext_resource type="PackedScene" uid="uid://bq1tb5n7xah0v" path="res://scenes/component/hitbox_component.tscn" id="2_dj4gv"]
 
-[sub_resource type="Animation" id="Animation_6gmo6"]
-length = 0.75
+[sub_resource type="Animation" id="Animation_ujfhx"]
+resource_name = "default"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_t7dfe"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -18,110 +35,28 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
-[sub_resource type="Animation" id="Animation_sseyw"]
-resource_name = "swing"
-length = 0.75
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1.41421, 1),
-"update": 0,
-"values": [0.0, -0.00872665, 3.14159, 1.5708]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 6.06286),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(1, 1), Vector2(1.5, 1.5), Vector2(0, 0)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.75),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("HitboxComponent/CollisionShape2D:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [true, false, true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5jyto"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7dgno"]
 _data = {
-"RESET": SubResource("Animation_6gmo6"),
-"swing": SubResource("Animation_sseyw")
+"RESET": SubResource("Animation_t7dfe"),
+"default": SubResource("Animation_ujfhx")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1gb4u"]
-size = Vector2(20, 40)
+[sub_resource type="CircleShape2D" id="CircleShape2D_6bght"]
 
 [node name="AxeAbility" type="Node2D"]
 script = ExtResource("1_3h4lc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_5jyto")
+"": SubResource("AnimationLibrary_7dgno")
 }
-autoplay = "swing"
+autoplay = "default"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_qgybb")
-offset = Vector2(0, -4)
 
 [node name="HitboxComponent" parent="." instance=ExtResource("2_dj4gv")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(10, 2)
-shape = SubResource("RectangleShape2D_1gb4u")
+shape = SubResource("CircleShape2D_6bght")

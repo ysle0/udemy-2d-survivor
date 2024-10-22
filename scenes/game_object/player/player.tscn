@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://becw1bli3vptr"]
+[gd_scene load_steps=11 format=3 uid="uid://becw1bli3vptr"]
 
 [ext_resource type="Texture2D" uid="uid://b1hh0evehb1nw" path="res://scenes/game_object/player/player.png" id="1_247vy"]
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_svwvf"]
 [ext_resource type="PackedScene" uid="uid://l316usymp7nt" path="res://scenes/component/health_component.tscn" id="2_j7vd8"]
 [ext_resource type="PackedScene" uid="uid://dw27x15cqr3d4" path="res://scenes/ability/sword/sword_ability_controller.tscn" id="2_ltlmd"]
 [ext_resource type="PackedScene" uid="uid://c45a3l7fbn7l7" path="res://scenes/ability/dash/dash_ability_controller.tscn" id="5_2efd0"]
+[ext_resource type="PackedScene" uid="uid://sfr5fys1acij" path="res://scenes/ability/axe/axe_ability_controller.tscn" id="5_fexwu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtdxa"]
 bg_color = Color(0.247059, 0.14902, 0.192157, 1)
@@ -33,6 +34,8 @@ unique_name_in_owner = true
 
 [node name="SwordAbilityController" parent="AbilityManager" instance=ExtResource("2_ltlmd")]
 unique_name_in_owner = true
+
+[node name="AxeAbilityController" parent="AbilityManager" instance=ExtResource("5_fexwu")]
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true

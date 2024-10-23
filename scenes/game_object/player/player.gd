@@ -10,8 +10,10 @@ const ACCELATION_SMOOTHING := 15
 @onready var dash_ability_controller: DashAbilityController = \
 	%DashAbilityController
 @onready var health_bar: ProgressBar = %HealthBar
+@onready var abilities: Node = $Abilities
 
 var colliding_body_count: int = 0
+
 
 func _ready():
 	self.collision_area_2d.body_entered.connect(on_body_entered)
@@ -19,6 +21,8 @@ func _ready():
 	self.damage_interval_timer.timeout.connect(
 		on_damage_interval_timer_timeout)
 	self.health_component.health_changed.connect(on_health_changed)
+	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
+
 	self.update_health_ui()
 
 
@@ -77,3 +81,14 @@ func on_damage_interval_timer_timeout():
 
 func on_health_changed():
 	self.update_health_ui()
+
+
+func on_ability_upgrade_added(ability_upgrade: AbilityUpgrade, current_upgrades: Dictionary):
+	if ability_upgrade is not Ability:
+		return
+
+	var ability := ability_upgrade as Ability
+	var ability_controller_instance := ability.ability_controller_scene.instantiate()
+	abilities.add_child(ability_controller_instance)
+
+
